@@ -3,10 +3,18 @@ const API_URL = 'https://wizard-world-api.herokuapp.com';
 async function getWizards() {
     const respuesta = await fetch(`${API_URL}/Wizards`);
     const data = await respuesta.json();
+    //console.table(data);
+    //console.log(data);
+    return data;
+}
+
+/*async function getElixirs() {
+    const respuesta = await fetch(`${API_URL}/Wizards`);
+    const data = await respuesta.json();
     console.table(data);
     console.log(data);
     return data;
-}
+}*/
 
 /*async function getWizards() {
     const respuesta = await fetch(`${API_URL}/Wizards`);
@@ -21,15 +29,19 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
       const dataHP = await getWizards();
       const element = document.getElementById('personatges');
 
-      for (const wizard of dataHP) {
+      /*for (const wizard of dataHP) {
         const newElement = document.createElement('li');
         newElement.innerHTML += "<h2>" + wizard.firstname + "</h2>";
         element.appendChild(newElement);
-      }
-
-      /*for (var wiz=0; wiz<17; wiz++) {
+      }*/
+        console.table(dataHP);
+        console.log(dataHP);
+      for (var wiz=0; wiz<17; wiz++) {
         const newElement = document.createElement('li');
         newElement.innerHTML += dataHP[wiz].lastName;
+        for (var elix=0; elix<3; elix++){
+            newElement.innerHTML += dataHP[wiz].elixirs[elix].name;
+        }
         element.appendChild(newElement);
-      }*/
+      }
   };
