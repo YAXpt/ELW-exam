@@ -1,5 +1,11 @@
 const API_URL = 'https://wizard-world-api.herokuapp.com';
 
+async function getHouses() {
+    const respuesta = await fetch(`${API_URL}/Houses`);
+    const data = await respuesta.json();
+    return data;
+}
+
 async function getWizards() {
     const respuesta = await fetch(`${API_URL}/Wizards`);
     const data = await respuesta.json();
@@ -34,13 +40,11 @@ async function amagarIngredients(idElixir, id){
 
 window.onload = async () => { //se esperará a q cargue el html y luego ejecutará este cacho de código
 
-    const dataHP = await getWizards();
-
-    const element = document.getElementById('personatges');
-
+    const dataWiz = await getWizards();
+    var element = document.getElementById('personatges');
     //debugger;
     var id=0;
-    for (const wizard of dataHP) {
+    for (const wizard of dataWiz) {
         const newElement = document.createElement('ul');
         newElement.innerHTML = `<li><h2> ${wizard.firstName} ${wizard.lastName} </h2></li>`;
         for (const elixir of wizard.elixirs) {
@@ -49,4 +53,17 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
         }
         element.appendChild(newElement);
     }
+
+    const dataHou = await getHouses();
+    element = document.getElementById('cases');
+    console.log(dataHou);
+    console.table(dataHou);
+    for (const houses of dataHou) {
+        const element2 = document.getElementById(houses.name);
+        console.log(element2);
+        const element1 = document.createElement('p');
+        element1.innerHTML += `${houses.name}`
+        element2.appendChild(element1);
+    }
+
 };

@@ -1,6 +1,13 @@
+header{
+    position:relative;
+    left: 43%;
+    margin: auto;
+    color:white;
+}
+
 body{
     background-image:url(https://images.unsplash.com/photo-1630121008235-22acfe348ed1);
-    color:azure;
+    color:rgb(179, 243, 243);
 }
 #personatges{
     background-color: rgba(0, 0, 0, 0.400);
