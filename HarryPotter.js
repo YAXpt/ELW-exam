@@ -28,20 +28,32 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
 
       const dataHP = await getWizards();
       const element = document.getElementById('personatges');
+      debugger;
+      for (const wizard of dataHP) {
+        const newElementLi = document.createElement('li');
+        newElementLi.innerHTML += "<h2>" + wizard.firstName + "</h2>";
+        element.appendChild(newElementLi);
+      }
+      //debugger;
+      for (const elix of dataHP[0].elixirs){
+        const newElementP = document.createElement('p');
+        newElementP.innerHTML += elix.name;
+        }
+      /*for (const elix of dataHP[0].elixirs){
+        const newElement = document.createElement('p');
+        newElement.innerHTML += elix.name;
+        element.appendChild(newElement);*/
 
-      /*for (const wizard of dataHP) {
-        const newElement = document.createElement('li');
-        newElement.innerHTML += "<h2>" + wizard.firstname + "</h2>";
-        element.appendChild(newElement);
-      }*/
+    };
+
+      /*
         console.table(dataHP);
         console.log(dataHP);
       for (var wiz=0; wiz<17; wiz++) {
         const newElement = document.createElement('li');
         newElement.innerHTML += dataHP[wiz].lastName;
-        for (var elix=0; elix<3; elix++){
-            newElement.innerHTML += dataHP[wiz].elixirs[elix].name;
+        for (const elix of dataHP){
+            //newElement.innerHTML += dataHP[wiz].elixirs[elix].name;
         }
         element.appendChild(newElement);
-      }
-  };
+      }*/
