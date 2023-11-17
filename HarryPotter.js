@@ -1,5 +1,10 @@
 const API_URL = 'https://wizard-world-api.herokuapp.com';
 
+//https://images4.alphacoders.com/556/thumbbig-556489.webp
+//https://images6.alphacoders.com/556/thumbbig-556494.webp
+//https://images8.alphacoders.com/556/556492.jpg
+//https://images.alphacoders.com/556/556471.jpg
+
 async function getHouses() {
     const respuesta = await fetch(`${API_URL}/Houses`);
     const data = await respuesta.json();
@@ -46,7 +51,11 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
     var id=0;
     for (const wizard of dataWiz) {
         const newElement = document.createElement('ul');
-        newElement.innerHTML = `<li><h2> ${wizard.firstName} ${wizard.lastName} </h2></li>`;
+        if(wizard.firstName !== null)
+            newElement.innerHTML = `<li><h3> ${wizard.firstName} ${wizard.lastName} </h3></li>`;
+        else
+            newElement.innerHTML = `<li><h3> ${wizard.lastName} </h3></li>`;
+
         for (const elixir of wizard.elixirs) {
             newElement.innerHTML += `${elixir.name}<ul id="${id}"><button onclick="mostrarIngredients('${elixir.id}', '${id}')">Mostra ingredients</button></ul>`;
             id++;
@@ -55,15 +64,14 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
     }
 
     const dataHou = await getHouses();
-    element = document.getElementById('cases');
+    elemento = document.getElementById('cases');
     console.log(dataHou);
     console.table(dataHou);
     for (const houses of dataHou) {
         const element2 = document.getElementById(houses.name);
         console.log(element2);
         const element1 = document.createElement('p');
-        element1.innerHTML += `${houses.name}`
+        element1.innerHTML += `<p>${houses.name}</p><p>${houses.founder}</p><p>${houses.element}</p>`
         element2.appendChild(element1);
     }
-
 };

@@ -2,16 +2,23 @@ header{
     position:relative;
     left: 43%;
     margin: auto;
-    color:white;
+    color:aqua;
 }
 
 body{
     background-image:url(https://images.unsplash.com/photo-1630121008235-22acfe348ed1);
-    color:rgb(179, 243, 243);
+    color:white;
 }
 #personatges{
     background-color: rgba(0, 0, 0, 0.400);
 }
 #cases{
     background-color: rgba(0, 0, 0, 0.400);
+}
+
+h2{
+    color: rgb(173, 196, 239);
+}
+h3{
+    color: rgb(120, 120, 230);
 }
