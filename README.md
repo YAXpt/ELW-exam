@@ -1,2 +1,2 @@
 # ELW-exam
-Repository for the ELW exam
+Repository for exam
