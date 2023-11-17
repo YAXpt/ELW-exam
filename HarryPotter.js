@@ -3,33 +3,34 @@ const API_URL = 'https://wizard-world-api.herokuapp.com';
 async function getWizards() {
     const respuesta = await fetch(`${API_URL}/Wizards`);
     const data = await respuesta.json();
-    //console.table(data);
-    //console.log(data);
     return data;
 }
 
-async function mostrarIngredients(idElixir){
-    var ubicacion = document.getElementById(idElixir);
+async function mostrarIngredients(idElixir, id){
+    var ubicacion = document.getElementById(id);
     const respuesta = await fetch(`${API_URL}/Elixirs/${idElixir}`);
     const data = await respuesta.json();
-    console.table(data);
-    console.log(data);
-    //debugger;
-    for (const ingredient of data.ingredients){
-        const newElement = document.createElement('li');
-        newElement.innerHTML += ingredient.name; 
-        ubicacion.appendChild(newElement);    
+
+    ubicacion.innerHTML = '';
+    if (data.ingredients.length !== 0){
+        ubicacion.innerHTML += `<button onclick="amagarIngredients('${idElixir}', '${id}')">Amaga ingredients</button>`;
+        for (const ingredient of data.ingredients){
+            ubicacion.innerHTML += `<li>${ingredient.name}</li>`; 
+        }
+    }
+    else {
+        ubicacion.innerHTML += `<button onclick="amagarIngredients('${idElixir}', '${id}')">
+                            Amaga ingredients</button><p>No hi ha ingredients coneguts</p>`;
     }
     
-    /*ubicacion.innerHTML += `
-        <li id="${idElem}">
-            ${idElem}    
-            <p class="count">1</p>
-            <button onclick="deleteItem('${idElem}')">Delete</button>
-        </li>
-        `     */ 
+
 }
 
+async function amagarIngredients(idElixir, id){
+    var ubicacion = document.getElementById(id);
+    ubicacion.innerHTML = '';
+    ubicacion.innerHTML += `<button onclick="mostrarIngredients('${idElixir}', '${id}')">Mostra ingredients</button>`;
+}
 
 window.onload = async () => { //se esperará a q cargue el html y luego ejecutará este cacho de código
 
@@ -38,18 +39,14 @@ window.onload = async () => { //se esperará a q cargue el html y luego ejecutar
     const element = document.getElementById('personatges');
 
     //debugger;
-
+    var id=0;
     for (const wizard of dataHP) {
         const newElement = document.createElement('ul');
-        newElement.innerHTML = `<li><h2> ${wizard.lastName} </h2><li>`;
+        newElement.innerHTML = `<li><h2> ${wizard.firstName} ${wizard.lastName} </h2></li>`;
         for (const elixir of wizard.elixirs) {
-            newElement.innerHTML += `<br>${elixir.name}</br><button onclick="mostrarIngredients('${elixir.id}')">Ingredients</button><ul id="${elixir.id}"></ul>`;
+            newElement.innerHTML += `${elixir.name}<ul id="${id}"><button onclick="mostrarIngredients('${elixir.id}', '${id}')">Mostra ingredients</button></ul>`;
+            id++;
         }
         element.appendChild(newElement);
-      /*for(const elix of dataHP[1].elixirs){ //mcet
-        const newElementP = document.createElement('p');
-        newElementP.innerHTML += elix.name;
-        element.appendChild(newElementP);
-        }*/
     }
 };
