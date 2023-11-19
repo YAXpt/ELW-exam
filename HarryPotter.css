@@ -39,14 +39,19 @@ h4{
 
 .elemFlotant{
     text-align: center;
-    float: left;
-    width: 300px; 
-    margin: 10px;
+    position: fixed;
+    top: 20%;
+    right: 5%;
+    width: 250px; 
     background-color:rgb(8, 8, 86);
 }
 
 @media (max-width: 600px) {
     .quadricula {
         flex-direction: column;
+    }
+    .elemFlotant {
+        width: 120px;
+        font-size: small;
     }
 }
