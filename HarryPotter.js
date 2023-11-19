@@ -75,14 +75,19 @@ function amagarIngredients(idElixir, id){
 function destacarPers(nom, cognom){
     var ubicacion = document.getElementById('persFlotant');
     if(nom === null)
-        ubicacion.innerHTML = `Personatge destacat: ${cognom}`;
+        ubicacion.innerHTML = `Personatge destacat: ${cognom}<button onclick="treureDeDestacats('persFlotant')">X</button>`;
     else
-        ubicacion.innerHTML = `Personatge destacat: ${nom} ${cognom}`;
-
+        ubicacion.innerHTML = `Personatge destacat: ${nom} ${cognom}<button onclick="treureDeDestacats('persFlotant')">X</button>`;
 }
 
-function  destacarCasa(nomCasa){
+function destacarCasa(nomCasa){
     var ubicacion = document.getElementById('casaFlotant');
-    ubicacion.innerHTML = `Casa destacada: ${nomCasa}`;
+    ubicacion.innerHTML = `Casa destacada: ${nomCasa} <button onclick="treureDeDestacats('casaFlotant')">X</button>`;
+}
 
+function treureDeDestacats(id){
+    debugger;
+    var ubicacion = document.getElementById(id);
+    console.log(id);
+    ubicacion.innerHTML = ' ';
 }
