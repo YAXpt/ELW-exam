@@ -1,6 +1,6 @@
 header{
-    position:relative;
-    left: 43%;
+    text-align: center;
+    
     margin: auto;
     color:aqua;
 }
@@ -10,10 +10,7 @@ body{
     background-size: cover;
     color:white;
 }
-#personatges{
-    background-color: rgba(0, 0, 0, 0.400);
-}
-#cases{
+#personatges, #cases{
     background-color: rgba(0, 0, 0, 0.400);
 }
 
@@ -22,4 +19,25 @@ h2{
 }
 h3{
     color: rgb(120, 120, 230);
+}
+
+
+.quadricula1,.quadricula2 {
+    justify-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.quadrat {
+    text-align: center;
+    width: 15em;
+    height: 15em;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 600px) {
+    .quadricula1, .quadricula2 {
+        flex-direction: column;
+    }
 }
