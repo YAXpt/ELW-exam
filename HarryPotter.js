@@ -73,9 +73,16 @@ function amagarIngredients(idElixir, id){
 }
 
 function destacarPers(nom, cognom){
+    var ubicacion = document.getElementById('persFlotant');
+    if(nom === null)
+        ubicacion.innerHTML = `Personatge destacat: ${cognom}`;
+    else
+        ubicacion.innerHTML = `Personatge destacat: ${nom} ${cognom}`;
 
 }
 
 function  destacarCasa(nomCasa){
-    
+    var ubicacion = document.getElementById('casaFlotant');
+    ubicacion.innerHTML = `Casa destacada: ${nomCasa}`;
+
 }
