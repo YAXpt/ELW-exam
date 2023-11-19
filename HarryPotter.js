@@ -1,9 +1,38 @@
 const API_URL = 'https://wizard-world-api.herokuapp.com';
 
-//https://images4.alphacoders.com/556/thumbbig-556489.webp
-//https://images6.alphacoders.com/556/thumbbig-556494.webp
-//https://images8.alphacoders.com/556/556492.jpg
-//https://images.alphacoders.com/556/556471.jpg
+window.onload = async () => {
+
+    const dataWiz = await getWizards();
+    var element = document.getElementById('personatges');
+    var id=0;
+    for (const wizard of dataWiz) {
+        const newElement = document.createElement('ul');
+        if(wizard.firstName !== null)
+            newElement.innerHTML = `<li><h3> ${wizard.firstName} ${wizard.lastName} </h3></li>`;
+        else
+            newElement.innerHTML = `<li><h3> ${wizard.lastName} </h3></li>`;
+        newElement.innerHTML += `<button onclick="destacarPers('${wizard.firstName}', '${wizard.lastName}')">Destacar</button><h4>Elixirs:</h4>`
+        for (const elixir of wizard.elixirs) {
+            newElement.innerHTML += `${elixir.name}<ul id="${id}"><button onclick="mostrarIngredients('${elixir.id}', '${id}')">Mostra ingredients</button></ul>`;
+            id++;
+        }
+        element.appendChild(newElement);
+    }
+
+    const dataHou = await getHouses();
+    for (const houses of dataHou) {
+        const element2 = document.getElementById(houses.name);
+        element2.innerHTML += `<div class="cases"><h3>${houses.name}</h3>
+        <p>Fundador: ${houses.founder}</p>
+        <p>Elemento: ${houses.element}</p>
+        <p>Animal: ${houses.animal}</p>
+        <p>Fantasma: ${houses.ghost}</p>
+        <p>Sala comú: ${houses.commonRoom}</p></div>
+        <button onclick="destacarCasa('${houses.name}')">Destacar</button>`;
+    }
+};
+
+
 
 async function getHouses() {
     const respuesta = await fetch(`${API_URL}/Houses`);
@@ -37,41 +66,16 @@ async function mostrarIngredients(idElixir, id){
 
 }
 
-async function amagarIngredients(idElixir, id){
+function amagarIngredients(idElixir, id){
     var ubicacion = document.getElementById(id);
     ubicacion.innerHTML = '';
     ubicacion.innerHTML += `<button onclick="mostrarIngredients('${idElixir}', '${id}')">Mostra ingredients</button>`;
 }
 
-window.onload = async () => { //se esperará a q cargue el html y luego ejecutará este cacho de código
+function destacarPers(nom, cognom){
 
-    const dataWiz = await getWizards();
-    var element = document.getElementById('personatges');
-    //debugger;
-    var id=0;
-    for (const wizard of dataWiz) {
-        const newElement = document.createElement('ul');
-        if(wizard.firstName !== null)
-            newElement.innerHTML = `<li><h3> ${wizard.firstName} ${wizard.lastName} </h3></li>`;
-        else
-            newElement.innerHTML = `<li><h3> ${wizard.lastName} </h3></li>`;
+}
 
-        for (const elixir of wizard.elixirs) {
-            newElement.innerHTML += `${elixir.name}<ul id="${id}"><button onclick="mostrarIngredients('${elixir.id}', '${id}')">Mostra ingredients</button></ul>`;
-            id++;
-        }
-        element.appendChild(newElement);
-    }
-
-    const dataHou = await getHouses();
-    elemento = document.getElementById('cases');
-    console.log(dataHou);
-    console.table(dataHou);
-    for (const houses of dataHou) {
-        const element2 = document.getElementById(houses.name);
-        console.log(element2);
-        const element1 = document.createElement('p');
-        element1.innerHTML += `<p>${houses.name}</p><p>${houses.founder}</p><p>${houses.element}</p>`
-        element2.appendChild(element1);
-    }
-};
+function  destacarCasa(nomCasa){
+    
+}
